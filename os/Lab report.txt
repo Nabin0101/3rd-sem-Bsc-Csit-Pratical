@@ -1,0 +1,133 @@
+Lab 1: Instllation of virtual Box and Demonstration Of Basic  Linux commands.
+ commands:touch,mkdir,rmdir,rm,cd,clear,df,mv,echo,man&help ls,ls-l,ls-la,pwd,cd.., cat(name of created folder)
+
+Lab 2: Process Creation
+
+#fork(): fork() is  an operating system whereby a process creates a copy of itself.
+	It is usually a system call,implement in the kernel.
+#getpid(): getpid() returns the process ID(PID) of the calling process.
+
+Program for creation of process:
+import os
+def parent process():
+	for i in range(1,10):
+		print("Parent proc:%d",os.getpid())
+	print("Parent process exiting")
+def child process():
+	for i in range(1,10):
+		print("Child proc:%d",%(i))
+	parent("child process exiting")
+#fork creates a child process
+retval=os.fork()
+print("Return value is%d",%(retval))
+if retval is 0:
+	childprocess()
+else:
+	parent process()
+
+
+
+Lab 3: Inter process communication using pipe()
+
+import os
+def communication (child_writes)
+	r,w=os.pipe()
+	processid=os.fork()
+	if processid:
+		os.close(w)
+		r=os.fdopen(r)
+		print("parent reading")
+		str=r.read()
+		print("Parent reads=",str)
+	else:
+		os.close(r)
+		w=os.fdopen(w,'w')
+		print("child writing")		
+		w.write(child_writes)
+		print("child writes=",child_writes)
+		w.close
+child_writes="This is a child process"
+communication(child_writes)
+
+
+
+Lab 4:program of first come first serve process scheduling
+
+def waitingTime(processes,n,bt,wt)
+	wt[i]=0
+	for i in range(1,n)
+		wt[i]=bt[i-1]+wt[i-1]
+def turnAroundTime(processes,n,bt,wt,tat)
+	for i in range(n):
+		tat[i]=bt[i]+wt[i]
+def avgTime(processes,n,bt)
+	wt=[0]*n
+	tat=[0]*n
+	total_wt=0
+	total_tat=0
+	waitingTime(processes,n,bt,wt)
+	turnAroundTime(processes,n,bt,wt,tat)
+	print("Processes Brust Time" + "Waiting Time" +"TurnAroundTime")
+	for i in  range(n):
+		total_wt=total_wt+wt[i]
+		total_wt=total_wt+tat[i]
+		print("   " + 	str(i+1) +"\t\t"+
+				str(bt[i]+"\t\t"+
+				str(wt[i]+"\t\t"+
+				str(tat[i])
+			)
+		print("Average waiting Time=",+str(total_wt/n))
+		print("Average turn around time=",+str(total_tat/n))
+
+if__name__="__main__":
+	#PROVIDE THE PROCESSES AS INPUT
+	processes=[1,2,3,4,5]
+	n=len(processes)
+	# PROVIDES THE BRUST TIME
+	brust_time+[21,3,6,2,15]
+	avgTime(processes,n,brust_time)
+
+lab 5:
+# Problem: Simulate the threading operation in Operating system which illustrates two threads
+# running seperate process simultaneously
+# IMPORT A MODULE
+# CREATE A THREAD
+# START THE THREADED OPERATION
+# FINALLY JOIN THE THREADS TO STOP THE TASK AFTER ITS COMPLETION
+
+import time
+import threading
+
+
+def get_process(processes):
+    for person in processes:
+        print("Currently running process is: " + person)
+        time.sleep(0.5)
+ 
+ 
+def assign_process_id(processes):
+    id = 1
+    for process in processes:
+        print("The process id of Process: {} is {}:".format(process, id))
+        id += 1
+        time.sleep(0.5)
+ 
+ 
+processes = ['Chrome', 'Firefox', 'Safari', 'Opera']
+ 
+log_time = time.time()
+ 
+
+first_thread = threading.Thread(target=get_process, args=(processes,))
+second_thread = threading.Thread(target=assign_process_id, args=(processes,))
+ 
+
+first_thread.start()
+second_thread.start()
+ 
+
+first_thread.join()
+second_thread.join()
+ 
+
+print("All Process Execution Completed with time:" + str(time.time() - log_time))
